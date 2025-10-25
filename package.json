@@ -1,0 +1,22 @@
+{
+  "name": "ng-pokedex-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "dotenvx run --env-file=.env.production -- node index.mjs",
+    "start:dev": "dotenvx run --env-file=.env -- node --watch index.mjs",
+    "predocker:build-run": "docker volume create ng-pokedex_mongodb",
+    "docker:build-run": "docker compose build --no-cache && docker compose up -d"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.51.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mongoose": "^8.19.2"
+  }
+}
