@@ -9,7 +9,10 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${DB_NAME}
     volumes:
+      - ./docker/init.sh:/docker-entrypoint-initdb.d/init.sh
+      - ./docker/pokemons.json:/docker-entrypoint-initdb.d/pokemons.json
       - ng-pokedex_mongodb:/data/db
 
 volumes:
