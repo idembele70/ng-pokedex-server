@@ -1,10 +1,10 @@
 import { Router } from 'express';
 import {
-  getAllPokemons,
+  searchPokemons,
 } from '../controllers/pokemon.controllers.mjs';
 
 const router = Router();
 
-router.get('/', getAllPokemons)
+router.get('/search', searchPokemons)
 
 export default router

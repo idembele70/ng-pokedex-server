@@ -1,6 +1,6 @@
 import Pokemon from "../database/models/pokemon.model.mjs";
 
-export const getAllPokemons = async (req, res, next) => {
+export const searchPokemons = async (req, res, next) => {
   const limit = Number.parseInt(req.query?.limit ) || 15;
   const page = Number.parseInt(req.query?.page) || 1;
   const offset = (page - 1) * limit;
