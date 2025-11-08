@@ -10,11 +10,17 @@ const {
 
 export const registerController = async (req, res, next) => {
   try {
-    await User.create({
+   const user = await User.create({
       email: req.body.email,
       password: req.body.password,
     });
-    res.sendStatus(201);
+    res.status(201).json({
+      message: 'User created successfully',
+      user : {
+        id: user._id,
+        email: user.email,
+      }
+    })
   } catch (error) {
     next(error);
   }
