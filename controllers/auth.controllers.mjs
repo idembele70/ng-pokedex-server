@@ -61,7 +61,7 @@ export const loginController = async (req, res, next) => {
       maxAge: refreshTokenDuration * oneDayInHour * oneHourInMinute * oneMinuteInSecond * oneSecondInMS,
     })
 
-    res.status(200).json({ accessToken });
+    res.status(200).json({ accessToken, ...payload });
 
   } catch (error) {
     next(error);
@@ -69,10 +69,8 @@ export const loginController = async (req, res, next) => {
 }
 
 export const refreshTokenController = async (req, res, next) => {
-  try {
+  try { 
     const refreshToken = req.cookies?.['refreshToken'];
-
-    if (!refreshToken) return res.status(401).json({ message: 'Unauthorized' });
 
     const decoded = jwt.verify(refreshToken, JWT_REFRESH_SECRET);
 
@@ -89,6 +87,19 @@ export const refreshTokenController = async (req, res, next) => {
 
     res.status(200).json({ accessToken: newAccessToken });
 
+  } catch (error) {
+    if (error.message === 'jwt expired')
+      return next(new Error('refresh token expired'));
+    next(error);
+  }
+}
+
+export const meController = async (req, res, next) => {
+  try {
+    res.status(200).json({
+      userId: req.user.userId,
+      email: req.user.email,
+    });
   } catch (error) {
     next(error);
   }
