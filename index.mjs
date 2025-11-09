@@ -24,8 +24,6 @@ app.use('/api/v1', router);
 
 app.use((err, _req, res, _next) => {
   console.error(err.message);
-  if(err.message === 'jwt expired')
-    return res.status(401).send('token expired');
   res.status(500).send('An error occured!');
 });
 
