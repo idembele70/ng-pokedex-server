@@ -13,9 +13,13 @@ POST https://localhost:4001/api/v1/auth/login HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "test-1@mail.fr",
-  "password": "totototo"
+  "email": "titi@mail.fr",
+  "password": "titititi"
 }
+
+### Logout
+GET https://localhost:4001/api/v1/auth/logout HTTP/1.1
+Cookie: refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTBmYTU0NzE5NzFlZTdmOWFiOGIxYjkiLCJlbWFpbCI6InRpdGlAbWFpbC5mciIsImlhdCI6MTc2Mjc4MzA2MCwiZXhwIjoxNzYzMzg3ODYwfQ.ZI0xfyJqU7VQkJbNQ7vr1Zxbh43lGwNHcR0IzggKjys; Max-Age=604800; Path=/api/v1/auth/refresh; Expires=Mon, 17 Nov 2025 13:57:40 GMT; HttpOnly; Secure; SameSite=Non
 
 ### Refresh token (cookie come from subsequent login request)
 POST https://localhost:4001/api/v1/auth/refresh HTTP/1.1

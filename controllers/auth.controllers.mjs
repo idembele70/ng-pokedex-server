@@ -1,3 +1,4 @@
+import BlacklistedRefreshTokenSchema from "../database/models/blacklisted-referesh-token.model.mjs";
 import User from "../database/models/user.model.mjs"
 import jwt from 'jsonwebtoken';
 
@@ -8,15 +9,23 @@ const {
   REFRESH_TOKEN_DURATION,
 } = process.env;
 
+const REFRESH_TOKEN_DEFAULT_COOKIE_OPTIONS = {
+  httpOnly: true,
+  secure: true,
+  sameSite: 'none',
+  path: '/api/v1/auth/',
+  maxAge: 0,
+}
+
 export const registerController = async (req, res, next) => {
   try {
-   const user = await User.create({
+    const user = await User.create({
       email: req.body.email,
       password: req.body.password,
     });
     res.status(201).json({
       message: 'User created successfully',
-      user : {
+      user: {
         id: user._id,
         email: user.email,
       }
@@ -52,14 +61,13 @@ export const loginController = async (req, res, next) => {
       oneHourInMinute = 60,
       oneMinuteInSecond = 60,
       oneSecondInMS = 1000;
+    const maxAge = refreshTokenDuration *
+      oneDayInHour * oneHourInMinute * oneMinuteInSecond * oneSecondInMS;
 
     res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: true,
-      sameSite: 'none',
-      path: '/api/v1/auth/refresh',
-      maxAge: refreshTokenDuration * oneDayInHour * oneHourInMinute * oneMinuteInSecond * oneSecondInMS,
-    })
+      ...REFRESH_TOKEN_DEFAULT_COOKIE_OPTIONS,
+      maxAge,
+    });
 
     res.status(200).json({ accessToken, ...payload });
 
@@ -69,7 +77,7 @@ export const loginController = async (req, res, next) => {
 }
 
 export const refreshTokenController = async (req, res, next) => {
-  try { 
+  try {
     const refreshToken = req.cookies?.['refreshToken'];
 
     const decoded = jwt.verify(refreshToken, JWT_REFRESH_SECRET);
@@ -100,6 +108,25 @@ export const meController = async (req, res, next) => {
       userId: req.user.userId,
       email: req.user.email,
     });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export const logoutController = async (req, res, next) => {
+  try {
+    const refreshToken = req.cookies?.['refreshToken'];
+    
+    res.clearCookie('refreshToken', REFRESH_TOKEN_DEFAULT_COOKIE_OPTIONS);
+    const payload = jwt.verify(refreshToken, JWT_REFRESH_SECRET);
+
+    await BlacklistedRefreshTokenSchema.create({
+      token: refreshToken,
+      userId: payload.userId,
+      expiresAt: payload.exp,
+    });
+
+    res.status(200).json({ message: 'Logged out!' });
   } catch (error) {
     next(error);
   }
