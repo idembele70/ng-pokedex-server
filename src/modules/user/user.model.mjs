@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 const { SALT_ROUNDS } = process.env;
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
   email: {
     type: String,
     required: true,
@@ -21,7 +21,7 @@ const userSchema = new Schema({
   timestamps: true,
 });
 
-userSchema.pre('save', async function(next) {
+UserSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
   try {
     const salt = await bcrypt.genSalt(+SALT_ROUNDS);
@@ -32,8 +32,8 @@ userSchema.pre('save', async function(next) {
   }
 })
 
-userSchema.method('comparePassword', async function (candidatePassword) {
+UserSchema.method('comparePassword', async function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 });
 
-export default model('User', userSchema);
+export default model('User', UserSchema);

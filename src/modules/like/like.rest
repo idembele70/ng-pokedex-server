@@ -1,0 +1,7 @@
+### Add LIKE
+POST https://localhost:4001/api/v1/likes/691455acd4ed1e6eaadeab28 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTE0OWE3NmIyMzFiNTcyZDMyZjkxMTIiLCJlbWFpbCI6InRpdGlAbWFpbC5mciIsImlhdCI6MTc2Mjk1Nzk0OCwiZXhwIjoxNzYyOTU4ODQ4fQ.acLei_H4ACoR9QSawajtX1CAfWiwfQmTx75bc5SmG6Y
+
+### Remove LIKE
+DELETE https://localhost:4001/api/v1/likes/691455acd4ed1e6eaadeab28 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTE0OWE3NmIyMzFiNTcyZDMyZjkxMTIiLCJlbWFpbCI6InRpdGlAbWFpbC5mciIsImlhdCI6MTc2Mjk1Nzk0OCwiZXhwIjoxNzYyOTU4ODQ4fQ.acLei_H4ACoR9QSawajtX1CAfWiwfQmTx75bc5SmG6Y
