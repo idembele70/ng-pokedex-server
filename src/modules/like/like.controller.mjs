@@ -8,7 +8,7 @@ export default class LikeController {
         ...req.user,
       });
       res
-        .status(200)
+        .status(201)
         .json({
           liked: true,
         });

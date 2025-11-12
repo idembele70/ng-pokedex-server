@@ -7,4 +7,4 @@ router
   .get('/', PokemonController.getAll)
   .get('/search', PokemonController.filterAll);
 
-export default router
+export default router;

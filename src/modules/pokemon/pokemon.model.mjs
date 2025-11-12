@@ -72,7 +72,7 @@ const PokemonSchema = new Schema({
   name: { type: String, required: true },
   img: String,
   type: [String],
-  likeCount: { type: Number, default: 0 },
+  likeCount: { type: Number, default: 0, min: 0 },
   stats: { type: StatsSchema, select: false },
   moves: { type: MovesSchema, select: false },
   damages: { type: DamagesSchema, select: false },
