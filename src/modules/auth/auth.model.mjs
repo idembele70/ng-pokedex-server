@@ -21,4 +21,4 @@ const BlacklistedRefreshTokenSchema = new Schema({
   },
 });
 
-export default model('BlacklistedRefreshToken', BlacklistedRefreshTokenSchema);
+export const BlacklistedRefreshToken = model('BlacklistedRefreshToken', BlacklistedRefreshTokenSchema);

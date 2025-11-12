@@ -1,0 +1,15 @@
+### GET ALL POKEMONS
+GET https://localhost:4001/api/v1/pokemons HTTP/1.1
+
+### SEARCH POKEMONS
+GET https://localhost:4001/api/v1/pokemons/search?limit=10&page=2
+
+### Pokemon that name contain "bu"
+GET https://localhost:4001/api/v1/pokemons/search?name=bu HTTP/1.1
+
+### Pokemon type list contain "grass"
+GET https://localhost:4001/api/v1/pokemons/search?type=grass HTTP/1.1
+
+### Pokemon id contain "0"
+GET https://localhost:4001/api/v1/pokemons/search?id=0&page=2 HTTP/1.1
+

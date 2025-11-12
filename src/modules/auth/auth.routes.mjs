@@ -6,10 +6,10 @@ import {
   refreshTokenController,
   meController,
   logoutController,
-} from '../controllers/auth.controllers.mjs';
+} from './auth.controllers.mjs';
 import {
   authMiddleware,
-} from '../middleware/auth.middleware.mjs';
+} from '../../core/middleware/auth.middleware.mjs';
 
 const router = Router();
 

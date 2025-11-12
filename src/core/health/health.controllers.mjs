@@ -1,4 +1,4 @@
-export const healthCheckController = (_req, res, next) => {
+export const getHealth = (_req, res, next) => {
   try {
     res
       .status(200)
@@ -8,7 +8,6 @@ export const healthCheckController = (_req, res, next) => {
         date: new Date().toISOString(),
       });
   } catch (error) {
-    console.error('Health check error:', error.message);
-    next(error)
+    next(error);
   }
 }

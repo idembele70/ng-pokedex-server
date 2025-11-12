@@ -1,0 +1,13 @@
+import { env } from "./env.mjs";
+
+const {
+  PROTOCOL,
+  HOST,
+  MONGO_LOCAL_PORT,
+  DB_NAME,
+  MONGO_ROOT_USERNAME,
+  MONGO_ROOT_PASSWORD,
+  MONGO_AUTH_SOURCE,
+} = env;
+
+export default `${PROTOCOL}//${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@${HOST}:${MONGO_LOCAL_PORT}/${DB_NAME}?authSource=${MONGO_AUTH_SOURCE}`;
