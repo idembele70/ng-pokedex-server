@@ -1,6 +1,6 @@
 import PokemonService from "./pokemon.service.mjs";
 
-export default class PokemonControllers {
+export default class PokemonController {
   static async getAll(req, res, next) {
     try {
       const result = await PokemonService.getAll(req.query);

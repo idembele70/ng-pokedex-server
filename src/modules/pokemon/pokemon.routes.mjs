@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import PokemonControllers from './pokemon.controllers.mjs';
+import PokemonController from './pokemon.controller.mjs';
 
 const router = Router();
 
 router
-  .get('/', PokemonControllers.getAll)
-  .get('/search', PokemonControllers.filterAll);
+  .get('/', PokemonController.getAll)
+  .get('/search', PokemonController.filterAll);
 
-export default router
+export default router;
