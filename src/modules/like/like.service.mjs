@@ -2,33 +2,38 @@ import Pokemon from "../pokemon/pokemon.model.mjs";
 import Like from "./like.model.mjs";
 
 export default class LikeService {
-  static add(payload) {
+  static async add(payload) {
     const { userId, pokemonId } = payload;
 
-    return Promise.all([
-      Like.create({
+    const like = await Like.create({
         userId,
         pokemonId,
-      }),
-      Pokemon.findByIdAndUpdate(pokemonId,
+      });
+
+      if (!like) {
+        return;
+      }
+
+      await Pokemon.findByIdAndUpdate(pokemonId,
         {
           $inc: { likeCount: 1 }
-        }
-      )
-    ]);
+        })
   }
 
-  static delete(payload) {
+  static async delete(payload) {
     const { userId, pokemonId } = payload;
 
-    return Promise.all([
-      Like.findOneAndDelete({
-        userId,
-        pokemonId,
-      }),
-      Pokemon.findByIdAndUpdate(pokemonId, {
-        $inc: { likeCount: -1 }
-      })
-    ])
+    const deleted = await Like.findOneAndDelete({
+      userId,
+      pokemonId,
+    });
+
+    if (!deleted) {
+      throw new Error('Cannot remove nonexistent like');
+    }
+
+    await Pokemon.findByIdAndUpdate(pokemonId, {
+      $inc: { likeCount: -1 }
+    });
   }
 }
