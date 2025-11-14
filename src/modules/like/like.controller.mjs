@@ -28,4 +28,16 @@ export default class LikeController {
       next(error);
     }
   }
+
+  static async getByUserId(req, res, next) {
+    try {
+      const likes = await LikeService.getByUserId(req.user.userId);
+
+      res
+        .status(200)
+        .json(likes);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

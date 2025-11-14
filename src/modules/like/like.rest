@@ -13,3 +13,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTE0O
 ### Remove LIKE (user 2)
 DELETE https://localhost:4001/api/v1/likes/691455acd4ed1e6eaadeab28 HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTE0OWE3NmIyMzFiNTcyZDMyZjkxMTIiLCJlbWFpbCI6InRpdGlAbWFpbC5mciIsImlhdCI6MTc2Mjk2MjY1MSwiZXhwIjoxNzYyOTYzNTUxfQ._YKnbv-eHivjLpX2ie-4IVSKTu8zJUD94MJw6t4WADs
+
+### Get user LIKES
+GET https://localhost:4001/api/v1/likes HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTE0YjRkMjZmY2IzMzQ2ZThmZmI3OWYiLCJlbWFpbCI6ImlrZEBtYWlsLmZyIiwiaWF0IjoxNzYzMTE5OTk1LCJleHAiOjE3NjMxMjA4OTV9.4tOubX8bjmbakYc3pPUSqKPnwne8Eqvqon7U-ZfhfXk
