@@ -21,11 +21,11 @@ app
   .use(cookieParser())
   .use('/api/v1', routes)
   .use((err, req, res, _next) => {
-    if (err.message === 'jwt expired'  && req.url !== '/api/v1/auth/refresh') {
+    if (err.message === 'jwt expired' && req.url !== '/api/v1/auth/refresh') {
       res.status(401).send(err.message);
     } else {
       console.error(err.message);
-      res.status(500).send('An error occured!');
+      res.status(500).send('An error occurred!');
     }
   })
   .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
