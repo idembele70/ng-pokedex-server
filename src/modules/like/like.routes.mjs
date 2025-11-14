@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import LikeController from './like.controller.mjs';
-import { authMiddleware } from '../../core/middleware/auth.middleware.mjs';
 
 const router = Router();
 
 router
-  .post('/:pokemonId', authMiddleware, LikeController.add)
-  .delete('/:pokemonId', authMiddleware, LikeController.delete);
+  .get('/', LikeController.getByUserId)
+  .post('/:pokemonId', LikeController.add)
+  .delete('/:pokemonId', LikeController.delete);
 
 export default router;

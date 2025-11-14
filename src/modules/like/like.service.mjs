@@ -36,4 +36,10 @@ export default class LikeService {
       $inc: { likeCount: -1 }
     });
   }
+
+  static getByUserId(userId) {
+    return Like.find({
+      userId,
+    }).distinct('pokemonId');
+  }
 }
