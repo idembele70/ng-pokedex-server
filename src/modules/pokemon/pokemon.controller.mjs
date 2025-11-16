@@ -22,4 +22,17 @@ export default class PokemonController {
       next(error);
     }
   }
+
+  static async filterLiked(req, res, next) {
+    try {
+      const result = await PokemonService.filterLiked(
+        { ...req.query, userId: req.user.userId }
+      );
+      res
+        .status(200)
+        .json(result);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

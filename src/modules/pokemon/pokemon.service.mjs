@@ -1,33 +1,30 @@
 import  PaginationUtilities from "../../core/utilities/pagination.utilities.mjs";
+import LikeService from "../like/like.service.mjs";
 import Pokemon from "./pokemon.model.mjs";
 
 export default class PokemonService {
-  static getAll(query) {
-    return this.#getPaginatedPokemons({
-      page: query.page,
-      limit: query.limit,
-    });
+  static getAll(reqQuery) {
+    const filter = this.#createFilterFromQuery(reqQuery);
+    return this.#getPaginatedPokemons(filter, reqQuery);
+  }
+  
+  static filterAll(reqQuery) {
+    const filter = this.#createFilterFromQuery(reqQuery);
+    return this.#getPaginatedPokemons(filter, reqQuery);
   }
 
-  static filterAll(query) {
-  return this.#getPaginatedPokemons(query)
+  static async filterLiked(reqQuery) {
+    const likedIds = await LikeService.getByUserId(reqQuery.userId);
+    const filter = { _id: { $in: likedIds } };
+    return this.#getPaginatedPokemons(filter, reqQuery);
   }
 
-  static async #getPaginatedPokemons(query) {
+  static async #getPaginatedPokemons(filter, reqQuery) {
     const {
       limit,
       page,
       offset
-    } = PaginationUtilities.parsePagination(query);
-    const { name, type, id } = query;
-    const filter = {};
-
-    if (name)
-      filter.name = this.#toRegex(name);
-    if (type)
-      filter.type = this.#toRegex(type);
-    if (id)
-      filter.id = this.#toRegex(id);
+    } = PaginationUtilities.parsePagination(reqQuery);
 
     const [
       totalItems,
@@ -44,6 +41,20 @@ export default class PokemonService {
       totalPages: Math.ceil(totalItems / limit) || 1,
       pokemons,
     };
+  }
+
+  static #createFilterFromQuery(query) {
+    const { name, type, id } = query;
+    const filter = {};
+
+    if (name)
+      filter.name = this.#toRegex(name);
+    if (type)
+      filter.type = this.#toRegex(type);
+    if (id)
+      filter.id = this.#toRegex(id);
+
+    return filter;
   }
 
   static #toRegex(str) {
