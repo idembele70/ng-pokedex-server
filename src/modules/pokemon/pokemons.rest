@@ -13,6 +13,6 @@ GET https://localhost:4001/api/v1/pokemons/search?type=grass HTTP/1.1
 ### Pokemon id contain "0"
 GET https://localhost:4001/api/v1/pokemons/search?id=0&page=2 HTTP/1.1
 
-### Filter user pokemons liked
+### GET user liked pokemons
 GET https://localhost:4001/api/v1/pokemons/likes HTTP/1.1
-Authorization: Basic eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTE0YjRkMjZmY2IzMzQ2ZThmZmI3OWYiLCJlbWFpbCI6ImlrZEBtYWlsLmZyIiwiaWF0IjoxNzYzMTYwNTQyLCJleHAiOjE3NjMxNjE0NDJ9.LLgm5tFOZh5NEXueVVA01tekU2-9aEzWetJkdnH3Bo4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTE0YjRkMjZmY2IzMzQ2ZThmZmI3OWYiLCJlbWFpbCI6ImlrZEBtYWlsLmZyIiwiaWF0IjoxNzYzMTYwNTQyLCJleHAiOjE3NjMxNjE0NDJ9.LLgm5tFOZh5NEXueVVA01tekU2-9aEzWetJkdnH3Bo4

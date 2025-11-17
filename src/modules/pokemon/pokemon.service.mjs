@@ -4,8 +4,7 @@ import Pokemon from "./pokemon.model.mjs";
 
 export default class PokemonService {
   static getAll(reqQuery) {
-    const filter = this.#createFilterFromQuery(reqQuery);
-    return this.#getPaginatedPokemons(filter, reqQuery);
+    return this.#getPaginatedPokemons({}, reqQuery);
   }
   
   static filterAll(reqQuery) {
