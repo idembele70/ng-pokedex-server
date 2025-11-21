@@ -6,8 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:prod": "dotenvx run --env-file=.env.production -- node src/server.mjs",
     "start:dev": "dotenvx run --env-file=.env -- node --watch src/server.mjs",
-    "predocker:build-run:prod": "ENV_FILE=.env.production docker compose down --rmi all -v && docker volume create ng-pokedex_mongodb",
-    "docker:build-run:prod": "ENV_FILE=.env.production docker compose build --no-cache && ENV_FILE=.env.production docker compose up -d",
+    "predocker:build-run:prod": "docker compose --env-file .env.production down --rmi all -v && docker volume create ng-pokedex_mongodb",
+    "docker:build-run:prod": "docker compose --env-file .env.production build --no-cache && docker compose --env-file .env.production up -d",
     "docker:compose-down": "docker compose down -v",
     "swagger": "node ./src/docs/swagger.mjs"
   },
