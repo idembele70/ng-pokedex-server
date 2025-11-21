@@ -1,9 +1,23 @@
 services:
+
+  server_nodejs:
+    container_name: ng_pokedex_server
+    depends_on:
+      - mongo
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_DOCKER_PORT: ${APP_DOCKER_PORT}
+    env_file: ${ENV_FILE}
+    ports:
+      - ${APP_LOCAL_PORT}:${APP_DOCKER_PORT}
+
   mongo:
     image: mongo:latest
     container_name: ng-pokedex_mongodb
     restart: unless-stopped
-    env_file: .env
+    env_file: ${ENV_FILE}
     ports: 
       - "${MONGO_LOCAL_PORT}:${MONGO_DOCKER_PORT}"
     environment:

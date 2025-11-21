@@ -1,7 +1,9 @@
 export const env = {
   NODE_ENV: process.env.NODE_ENV,
   CLIENT_ORIGIN: process.env.CLIENT_ORIGIN,
-  MONGO_LOCAL_PORT: process.env.MONGO_LOCAL_PORT,
+  MONGO_PORT: process.env.NODE_ENV === 'development'
+    ?  process.env.MONGO_LOCAL_PORT
+    : process.env.MONGO_DOCKER_PORT,
   MONGO_DOCKER_PORT: process.env.MONGO_DOCKER_PORT,
   MONGO_ROOT_USERNAME: process.env.MONGO_ROOT_USERNAME,
   MONGO_ROOT_PASSWORD: process.env.MONGO_ROOT_PASSWORD,
@@ -14,5 +16,5 @@ export const env = {
   JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET,
   ACCESS_TOKEN_DURATION: process.env.ACCESS_TOKEN_DURATION,
   REFRESH_TOKEN_DURATION: process.env.REFRESH_TOKEN_DURATION,
-  APP_PORT: process.env.APP_PORT,
+  APP_PORT: process.env.APP_LOCAL_PORT,
 }

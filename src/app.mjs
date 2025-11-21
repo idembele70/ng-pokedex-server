@@ -19,7 +19,7 @@ app
   }))
   .use(express.json())
   .use(cookieParser())
-  .use('/api/v1', routes)
+  .use('/ng-pokedex/api/v1', routes)
   .use((err, req, res, _next) => {
     if (err.message === 'jwt expired' && req.url !== '/api/v1/auth/refresh') {
       res.status(401).send(err.message);

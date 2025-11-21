@@ -1,5 +1,5 @@
 ### GET ALL POKEMONS
-GET https://localhost:4001/api/v1/pokemons?page=1 HTTP/1.1
+GET https://localhost:4001/ng-pokedex/api/v1/pokemons?page=1 HTTP/1.1
 
 ### SEARCH POKEMONS
 GET https://localhost:4001/api/v1/pokemons/search?limit=10&page=2
