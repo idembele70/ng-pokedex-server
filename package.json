@@ -5,8 +5,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:prod": "dotenvx run --env-file=.env.production -- node src/server.mjs",
+    "prestart:dev": "docker compose up -d mongo",
     "start:dev": "dotenvx run --env-file=.env -- node --watch src/server.mjs",
-    "predocker:build-run:prod": "docker compose --env-file .env.production down --rmi all -v && docker volume create ng-pokedex_mongodb",
+    "predocker:build-run:dev": "docker compose --env-file .env down --rmi all -v",
+    "docker:build-run:dev": "docker compose --env-file .env build --no-cache mongo && docker compose --env-file .env up -d mongo",
+    "predocker:build-run:prod": "docker compose --env-file .env.production down --rmi all -v",
     "docker:build-run:prod": "docker compose --env-file .env.production build --no-cache && docker compose --env-file .env.production up -d",
     "docker:compose-down": "docker compose down -v",
     "swagger": "node ./src/docs/swagger.mjs"
