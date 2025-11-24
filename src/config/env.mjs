@@ -17,4 +17,5 @@ export const env = {
   ACCESS_TOKEN_DURATION: process.env.ACCESS_TOKEN_DURATION,
   REFRESH_TOKEN_DURATION: process.env.REFRESH_TOKEN_DURATION,
   APP_PORT: process.env.APP_LOCAL_PORT,
+  BASE_URL: process.env.APP_BASE_URL,
 }

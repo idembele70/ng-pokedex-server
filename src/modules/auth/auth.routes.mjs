@@ -10,13 +10,14 @@ import {
 import {
   authMiddleware,
 } from '../../core/middleware/auth.middleware.mjs';
+import authPaths from './auth.paths.mjs';
 
 const router = Router();
 
-router.post('/register', registerController);
-router.post('/login', loginController);
-router.get('/refresh', refreshTokenController);
-router.get('/me', authMiddleware, meController);
-router.get('/logout', logoutController);
+router.post(authPaths.REGISTER, registerController);
+router.post(authPaths.LOGIN, loginController);
+router.get(authPaths.REFRESH, refreshTokenController);
+router.get(authPaths.ME, authMiddleware, meController);
+router.get(authPaths.LOGOUT, logoutController);
 
 export default router;

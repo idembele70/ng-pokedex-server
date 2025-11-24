@@ -7,10 +7,11 @@ import swaggerUi from 'swagger-ui-express';
 import { env } from './config/env.mjs';
 import './core/db.mjs';
 import routes from './modules/routes.mjs';
+import AUTH_PATHS from './modules/auth/auth.paths.mjs';
 const require = createRequire(import.meta.url)
 const swaggerFile = require('./docs/swagger-output.json');
 
-const { CLIENT_ORIGIN } = env;
+const { CLIENT_ORIGIN, BASE_URL } = env;
 const app = express();
 
 app
@@ -20,9 +21,12 @@ app
   }))
   .use(express.json())
   .use(cookieParser())
-  .use('/ng-pokedex/api/v1', routes)
+  .use(BASE_URL, routes)
   .use((err, req, res, _next) => {
-    if (err.message === 'jwt expired' && req.url !== '/api/v1/auth/refresh') {
+    if (
+      err.message === 'jwt expired' &&
+      req.url !== `${BASE_URL}${AUTH_PATHS.BASE_PATH}${AUTH_PATHS.REFRESH}`
+    ) {
       res.status(401).send(err.message);
     } else {
       console.error(err.message);

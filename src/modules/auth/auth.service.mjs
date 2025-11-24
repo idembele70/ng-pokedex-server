@@ -2,13 +2,13 @@ import jwt from 'jsonwebtoken';
 import { env } from "../../config/env.mjs";
 import User from "../user/user.model.mjs";
 import { BlacklistedRefreshToken } from './auth.model.mjs';
-
+import AUTH_PATHS from './auth.paths.mjs';
 export default class AuthService {
   static REFRESH_TOKEN_DEFAULT_COOKIE_OPTIONS = {
     httpOnly: true,
     secure: true,
     sameSite: 'none',
-    path: '/api/v1/auth/',
+    path: `${env.BASE_URL}${AUTH_PATHS.BASE_PATH}`,
     maxAge: 0,
   };
 
@@ -82,7 +82,7 @@ export default class AuthService {
   }
 
   static async logout(refreshToken) {
-    const payload = jwt.verify(refreshToken, env.JWT_REFRESH_SECRET);
+    const payload = jwt.decode(refreshToken, env.JWT_REFRESH_SECRET);
 
     await BlacklistedRefreshToken.create({
       token: refreshToken,
