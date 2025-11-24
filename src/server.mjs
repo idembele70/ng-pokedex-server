@@ -1,10 +1,11 @@
-import https from 'node:https';
-import fs from 'node:fs';
-import path from 'node:path'
 import '@dotenvx/dotenvx/config';
-import app from './app.mjs'
+import fs from 'node:fs';
+import https from 'node:https';
+import path from 'node:path';
+import app from './app.mjs';
+import { env } from './config/env.mjs';
 
-const { APP_PORT } = process.env;
+const { APP_PORT } = env;
 
   const certFolderURL = ['src', 'config', 'cert'];
   const certExt = '.pem';

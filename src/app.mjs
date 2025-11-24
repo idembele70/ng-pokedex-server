@@ -1,15 +1,16 @@
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
-import swaggerUi from 'swagger-ui-express';
 import { createRequire } from 'node:module';
+import swaggerUi from 'swagger-ui-express';
 
+import { env } from './config/env.mjs';
 import './core/db.mjs';
 import routes from './modules/routes.mjs';
 const require = createRequire(import.meta.url)
 const swaggerFile = require('./docs/swagger-output.json');
 
-const { CLIENT_ORIGIN } = process.env;
+const { CLIENT_ORIGIN } = env;
 const app = express();
 
 app

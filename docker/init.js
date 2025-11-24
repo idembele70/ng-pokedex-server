@@ -1,25 +1,6 @@
-const { loadEnvFile } = require('node:process');
+console.log('Starting running script');
+pokemons = require('/docker-entrypoint-initdb.d/pokemons.json');
 
-loadEnvFile('.env');
-const {
-  PROTOCOL,
-  HOST,
-  MONGO_DOCKER_PORT,
-  DB_NAME,
-  MONGO_ROOT_USERNAME,
-  MONGO_ROOT_PASSWORD,
-  MONGO_AUTH_SOURCE,
-} = process.env;
-const uri = `${PROTOCOL}//${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@${HOST}:${MONGO_DOCKER_PORT}/${DB_NAME}?authSource=${MONGO_AUTH_SOURCE}`;
-
-const db = connect(uri);
-
-db.pokemons.drop();
-
-const pokemons = require('./pokemons.json');
-
-const startTime = Date.now();
-console.log('start inserting data...');
+// https://hub.docker.com/_/mongo#initializing-a-fresh-instance
+// use the database specified by the MONGO_INITDB_DATABASE
 db.pokemons.insertMany(pokemons);
-
-console.log(`Data inserted in ${Date.now() - startTime}ms`);

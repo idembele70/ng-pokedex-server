@@ -1,12 +1,7 @@
 set -e
 
-mongosh <<EOF
-use ${DB_NAME}
-db.createCollection("pokemons")
-EOF
-
 mongoimport \
-  --db "${DB_NAME}" \
+  --db "${MONGO_INITDB_DATABASE}" \
   --collection "pokemons" \
   --file "/docker-entrypoint-initdb.d/pokemons.json" \
   --jsonArray

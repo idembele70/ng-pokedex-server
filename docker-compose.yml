@@ -27,9 +27,3 @@ services:
     volumes:
       - ./docker/init.js:/docker-entrypoint-initdb.d/init.js
       - ./docker/pokemons.json:/docker-entrypoint-initdb.d/pokemons.json
-      - ../.env:/docker-entrypoint-initdb.d/.env
-      - ng-pokedex_mongodb:/data/db
-
-volumes:
-  ng-pokedex_mongodb:
-    external: true
